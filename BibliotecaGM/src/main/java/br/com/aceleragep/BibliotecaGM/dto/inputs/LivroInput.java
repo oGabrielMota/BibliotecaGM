@@ -24,7 +24,7 @@ public class LivroInput {
 
 	@NotNull(message = "Ano do Lançamento é obrigatório!")
 	@Min(value= 1900, message="Indique um ano valido")
-	@Max(value= 2023, message="Indique um ano valido porra")
+	@Max(value= 2023, message="Indique um ano valido")
 	private Integer anoLancamento;
 	
 
