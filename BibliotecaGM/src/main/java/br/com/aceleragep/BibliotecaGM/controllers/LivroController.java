@@ -18,12 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.aceleragep.BibliotecaGM.configs.URLConfig;
 import br.com.aceleragep.BibliotecaGM.converts.LivroConvert;
-import br.com.aceleragep.BibliotecaGM.dto.inputs.ImagemLivroInput;
 import br.com.aceleragep.BibliotecaGM.dto.inputs.LivroInput;
-import br.com.aceleragep.BibliotecaGM.dtos.outputs.ImagemLivroOutput;
 import br.com.aceleragep.BibliotecaGM.dtos.outputs.LivroOutput;
 import br.com.aceleragep.BibliotecaGM.entities.LivroEntity;
-import br.com.aceleragep.BibliotecaGM.entities.LivroImagemEntity;
 import br.com.aceleragep.BibliotecaGM.services.LivroService;
 
 
@@ -74,36 +71,4 @@ public class LivroController {
 		return livroConvert.entityToOutput(livrosLocalizados);
 	}
 	
-	@ResponseStatus(code = HttpStatus.CREATED)
-	@PostMapping("/{id}/imagem")
-	public ImagemLivroOutput imagem(@RequestBody @Valid ImagemLivroInput livroImagemInput, @PathVariable Long id) {
-		LivroEntity livroLocalizado = livroService.buscaLivroPeloId(id);
-		LivroImagemEntity livroImagemEntity = new LivroImagemEntity(null, livroImagemInput.getImagem(),
-				livroLocalizado);
-		LivroImagemEntity imagemInserida = livroService.inseriImagem(livroImagemEntity);
-		return livroConvert.imagemEntityToOutput(imagemInserida);
-	}
-
-	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	@DeleteMapping("/{id}/imagem/{imagemId}")
-	public void removeImagem(@PathVariable Long id, @PathVariable Long imagemId) {
-		LivroEntity livroLocalizado = livroService.buscaLivroPeloId(id);
-		LivroImagemEntity imagemLocalizada = livroService.buscaImagem(livroLocalizado, imagemId);
-		livroService.removeImagem(imagemLocalizada);
-	}
-
-	@GetMapping("/{id}/imagem/{imagemId}")
-	public ImagemLivroOutput buscaImagem(@PathVariable Long id, @PathVariable Long imagemId) {
-		LivroEntity livroLocalizado = livroService.buscaLivroPeloId(id);
-		LivroImagemEntity imagemLocalizada = livroService.buscaImagem(livroLocalizado, imagemId);
-		return livroConvert.imagemEntityToOutput(imagemLocalizada);
-	}
-
-	@GetMapping("/{id}/imagem")
-	public List<ImagemLivroOutput> listaTodasImagens(@PathVariable Long id) {
-		LivroEntity livroLocalizado = livroService.buscaLivroPeloId(id);
-		List<LivroImagemEntity> imagemLocalizada = livroService.listaImagensPeloLivro(livroLocalizado);
-		return livroConvert.imagemEntityToOutput(imagemLocalizada);
-	}
-
 }

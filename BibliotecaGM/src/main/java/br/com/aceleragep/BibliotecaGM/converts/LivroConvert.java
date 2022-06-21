@@ -9,12 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.aceleragep.BibliotecaGM.dto.inputs.LivroInput;
-import br.com.aceleragep.BibliotecaGM.dtos.outputs.ImagemLivroOutput;
 import br.com.aceleragep.BibliotecaGM.dtos.outputs.LivroOutput;
-import br.com.aceleragep.BibliotecaGM.dtos.outputs.LivroSemAutorOutput;
 import br.com.aceleragep.BibliotecaGM.entities.AutorEntity;
 import br.com.aceleragep.BibliotecaGM.entities.LivroEntity;
-import br.com.aceleragep.BibliotecaGM.entities.LivroImagemEntity;
 import br.com.aceleragep.BibliotecaGM.services.AutoresService;
 
 
@@ -49,16 +46,6 @@ public class LivroConvert {
 		}).collect(Collectors.toList());
 	}
 
-	public LivroSemAutorOutput entityToSemAutorOutput(LivroEntity livroEntity) {
-		return modelMapper.map(livroEntity, LivroSemAutorOutput.class);
-	}
-
-	public List<LivroSemAutorOutput> entityToSemAutorOutput(List<LivroEntity> livros) {
-		return livros.stream().map(livroEntity -> {
-			return entityToSemAutorOutput(livroEntity);
-		}).collect(Collectors.toList());
-	}
-
 	private void converteIdsAutorParaAutores(LivroInput livroInput, LivroEntity livroEntity) {
 		List<AutorEntity> autores = new ArrayList<>();
 		for (Long idAutor : livroInput.getAutores()) {
@@ -68,14 +55,4 @@ public class LivroConvert {
 		livroEntity.setAutores(autores);
 	}
 
-	public ImagemLivroOutput imagemEntityToOutput(LivroImagemEntity imagemInserida) {
-		return modelMapper.map(imagemInserida, ImagemLivroOutput.class);
-	}
-
-	public List<ImagemLivroOutput> imagemEntityToOutput(List<LivroImagemEntity> imagemLocalizada) {
-		return imagemLocalizada.stream().map(livroEntity -> {
-			return imagemEntityToOutput(livroEntity);
-		}).collect(Collectors.toList());
-	}
-	
 }

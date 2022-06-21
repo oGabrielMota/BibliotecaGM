@@ -21,10 +21,10 @@ public class AutorEntity {
 	@Column(name="id")
 	private Long id;
 	
-	@Column(name="nome")
+	@Column(name="nome", length=100)
 	private String nome;
 	
-	@Column(name="bibliografia")
+	@Column(name="bibliografia", length=1000)
 	private String bibliografia;
 
 	

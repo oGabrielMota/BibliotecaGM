@@ -15,14 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.aceleragep.BibliotecaGM.configs.URLConfig;
 import br.com.aceleragep.BibliotecaGM.converts.AutorConvert;
-import br.com.aceleragep.BibliotecaGM.converts.LivroConvert;
 import br.com.aceleragep.BibliotecaGM.dto.inputs.AutorInput;
 import br.com.aceleragep.BibliotecaGM.dtos.outputs.AutorOutput;
-import br.com.aceleragep.BibliotecaGM.dtos.outputs.LivroSemAutorOutput;
 import br.com.aceleragep.BibliotecaGM.entities.AutorEntity;
-import br.com.aceleragep.BibliotecaGM.entities.LivroEntity;
 import br.com.aceleragep.BibliotecaGM.services.AutoresService;
-import br.com.aceleragep.BibliotecaGM.services.LivroService;
 
 
 
@@ -35,21 +31,17 @@ public class AutoresController {
 	@Autowired
 	private AutoresService autorService;
 
-	@Autowired
-	private LivroService livroService;
-
-	@Autowired
+    @Autowired
 	private AutorConvert autorConvert;
 
-	@Autowired
-	private LivroConvert livroConvert;
-
 	@PostMapping
-	public AutorOutput cria(@RequestBody AutorInput autorInput) {
-		AutorEntity autorEntity = autorConvert.inputToNewEntity(autorInput);
+	public AutorOutput cria(@RequestBody @Valid AutorInput autorInput) {
+	AutorEntity autorEntity = autorConvert.inputToNewEntity(autorInput);
 		AutorEntity autorCriado = autorService.cria(autorEntity);
+		
 		return autorConvert.entityToOutput(autorCriado);
-	}
+		}
+	
 
 	@PutMapping("/{id}")
 	public AutorOutput atualiza(@PathVariable Long id, @RequestBody @Valid AutorInput autorInput) {
@@ -71,12 +63,6 @@ public class AutoresController {
 		return autorConvert.entityToOutput(listaTodos);
 	}
 
-	@GetMapping("/{id}/livros")
-	public List<LivroSemAutorOutput> buscaLivroPeloIdDoAutor(@PathVariable Long id) {
-		autorService.buscaPeloId(id);
-		List<LivroEntity> livros = livroService.buscaLivrosPeloIdAutor(id);
-		return livroConvert.entityToSemAutorOutput(livros);
-	}
 
 	
 	

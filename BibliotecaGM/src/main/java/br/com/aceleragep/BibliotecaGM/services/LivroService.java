@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.aceleragep.BibliotecaGM.entities.LivroEntity;
-import br.com.aceleragep.BibliotecaGM.entities.LivroImagemEntity;
 import br.com.aceleragep.BibliotecaGM.exeptions.NotFoundBussinessException;
-import br.com.aceleragep.BibliotecaGM.repository.LivroImagemRepository;
 import br.com.aceleragep.BibliotecaGM.repository.LivroRepository;
 
 
@@ -18,8 +16,6 @@ public class LivroService {
 	@Autowired
 	private LivroRepository livroRepository;
 
-	@Autowired
-	private LivroImagemRepository livroImagemRepository;
 
 	public LivroEntity cria(LivroEntity livroEntity) {
 		return livroRepository.save(livroEntity);
@@ -47,24 +43,4 @@ public class LivroService {
 		return livroRepository.save(livroEntity);
 	}
 
-	public LivroImagemEntity inseriImagem(LivroImagemEntity livroImagemEntity) {
-		return livroImagemRepository.save(livroImagemEntity);
-	}
-
-	public LivroImagemEntity buscaImagem(LivroEntity livroLocalizado, Long imagemId) {
-		LivroImagemEntity imagem = livroImagemRepository.findById(imagemId)
-				.orElseThrow(() -> new NotFoundBussinessException(String.format("Imagem %d não encontrada", imagemId)));
-		if (!imagem.getLivro().getId().equals(livroLocalizado.getId())) {
-			throw new NotFoundBussinessException("Imagem não pertence ao livro.");
-		}
-		return imagem;
-	}
-
-	public void removeImagem(LivroImagemEntity imagemLocalizada) {
-		livroImagemRepository.delete(imagemLocalizada);
-	}
-
-	public List<LivroImagemEntity> listaImagensPeloLivro(LivroEntity livroLocalizado) {
-		return livroImagemRepository.findAllByLivro(livroLocalizado);
-	}
 }
