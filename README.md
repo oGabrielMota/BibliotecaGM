@@ -8,7 +8,9 @@ Para usar/testar a aplicação do mesmo necessita de alguns passos:
 2-> Rodar a api do projeto 
 <br>
 2.1 -> Via IDE de sua preferencia 
-    ou diretamente pelo arquivo **BibliotecaGM-0.0.1-SNAPSHOT** ( no Prompt de Comando na pasta com o arquivo, executando o aquivo da seguinte forma: "java -jar                    BibliotecaGM-0.0.1-SNAPSHOT.jar
+    ou 
+  <br>
+    diretamente pelo arquivo **BibliotecaGM-0.0.1-SNAPSHOT** ( no Prompt de Comando na pasta com o arquivo, executando o aquivo da seguinte forma: "java -jar                    BibliotecaGM-0.0.1-SNAPSHOT.jar
 <br>
 3-> Utilizar algum serviço para testes diretos ( Postman, Insomnia entre outros ).
 <br>
