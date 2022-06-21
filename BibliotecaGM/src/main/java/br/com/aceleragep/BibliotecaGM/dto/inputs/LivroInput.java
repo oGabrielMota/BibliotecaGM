@@ -2,6 +2,7 @@ package br.com.aceleragep.BibliotecaGM.dto.inputs;
 
 import java.util.List;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -22,7 +23,8 @@ public class LivroInput {
 	private String titulo;
 
 	@NotNull(message = "Ano do Lançamento é obrigatório!")
-	@Min(value = 4, message="Indique um ano valido")
+	@Min(value= 1900, message="Indique um ano valido")
+	@Max(value= 2023, message="Indique um ano valido porra")
 	private Integer anoLancamento;
 	
 
