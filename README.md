@@ -6,7 +6,9 @@ Para usar/testar a aplicação do mesmo necessita de alguns passos:
 1-> MySql aberto rodando na porta (3306);
 <br>
 2-> Rodar a api do projeto ( Via Eclipse ou diretamente pelo arquivo **BibliotecaGM-0.0.1-SNAPSHOT** )
+<br>
 3-> Utilizar algum serviço para testes diretos ( Postman, Insomnia entre outros ).
+<br>
 3.1 -> Ou de uma maneira simplificada, via a propria documentação, conforme informado logo a baixo :
 
 
