@@ -12,7 +12,7 @@ public class AutorOutput {
 	
 	private Long id;
 	private String nome;
-	private String bibliografia;
+	private String biografia;
 	
 	}
 	

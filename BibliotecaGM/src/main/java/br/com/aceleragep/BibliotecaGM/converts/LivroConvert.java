@@ -6,10 +6,12 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import br.com.aceleragep.BibliotecaGM.dto.inputs.LivroInput;
 import br.com.aceleragep.BibliotecaGM.dtos.outputs.LivroOutput;
+import br.com.aceleragep.BibliotecaGM.dtos.outputs.LivroSemAutorOutput;
 import br.com.aceleragep.BibliotecaGM.entities.AutorEntity;
 import br.com.aceleragep.BibliotecaGM.entities.LivroEntity;
 import br.com.aceleragep.BibliotecaGM.services.AutoresService;
@@ -53,6 +55,18 @@ public class LivroConvert {
 			autores.add(autor);
 		}
 		livroEntity.setAutores(autores);
+	}
+	
+	public LivroSemAutorOutput entityToSemAutorOutput(LivroEntity livroEntity) {
+		return modelMapper.map(livroEntity, LivroSemAutorOutput.class);
+	}
+	
+	public Page<LivroOutput> listPageEntityToListPageOutput(Page<LivroEntity> livroLocalizados){
+		return livroLocalizados.map(this::entityToOutput);
+	}
+	
+	public Page<LivroSemAutorOutput> listPageEntityToListPageOutputCopy(Page<LivroEntity> livros){
+		return livros.map(this::entityToSemAutorOutput);
 	}
 
 }

@@ -1,9 +1,10 @@
 package br.com.aceleragep.BibliotecaGM.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.aceleragep.BibliotecaGM.entities.AutorEntity;
@@ -33,8 +34,10 @@ public class AutoresService {
 		}
 	}
 
-	public List<AutorEntity> listaTodos() {
-		return autorRepository.findAll();
+	public Page<AutorEntity> listaTodos(Pageable paginacao){
+		Page<AutorEntity> encontrou = autorRepository.findAll(paginacao);
+		return encontrou;
 	}
+
 
 }

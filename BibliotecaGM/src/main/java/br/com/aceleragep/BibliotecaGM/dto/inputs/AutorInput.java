@@ -17,7 +17,7 @@ public class AutorInput {
 	@Length(max = 100 , message="Nome grande demais, maximo 100 Caracteres")
 	private String nome;
 	
-	@NotEmpty(message="Bibliografia é obrigatória!")
-	@Length(max = 1000 , message="Descrição muito grande, maximo 1000 Caracteres")
-	private String bibliografia;
+	@NotEmpty(message="Biografia é obrigatória!")
+	@Length(max = 1000 , message="Biografia muito grande, maximo 1000 Caracteres")
+	private String biografia;
 }

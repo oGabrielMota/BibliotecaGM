@@ -3,6 +3,8 @@ package br.com.aceleragep.BibliotecaGM.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.aceleragep.BibliotecaGM.entities.LivroEntity;
@@ -19,11 +21,6 @@ public class LivroService {
 
 	public LivroEntity cria(LivroEntity livroEntity) {
 		return livroRepository.save(livroEntity);
-	}
-
-	public List<LivroEntity> buscaLivrosPeloIdAutor(Long id) {
-
-		return livroRepository.findAllByAutoresId(id);
 	}
 
 	public LivroEntity buscaLivroPeloId(Long id) {
@@ -43,4 +40,9 @@ public class LivroService {
 		return livroRepository.save(livroEntity);
 	}
 
+	
+	public Page<LivroEntity> buscaLivroPeloIdAutor (Long id, Pageable paginacao) {
+		return livroRepository.findAllByAutoresId(id, paginacao);
+	}
+	
 }
